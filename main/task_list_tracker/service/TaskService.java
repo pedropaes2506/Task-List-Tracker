@@ -4,6 +4,7 @@ import main.task_list_tracker.domain.Task;
 import main.task_list_tracker.repository.TaskRepository;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
 
@@ -21,13 +22,11 @@ public class TaskService {
         System.out.println("3. In progress");
 
         int op = Integer.parseInt(SCANNER.nextLine());
-        String status;
-        switch (op) {
-            case 1: status = "DONE";
-            case 2: status = "TO DO";
-            case 3: status = "IN PROGRESS";
-            default: status = "TO DO";
-        }
+        String status = switch (op) {
+            case 1 -> "DONE";
+            case 3 -> "IN PROGRESS";
+            default -> "TO DO";
+        };
 
         Task task = Task.builder()
                 .name(name)
@@ -39,30 +38,49 @@ public class TaskService {
         TaskRepository.save(task);
     }
 
-//    public static void update() {
-//        System.out.println("Type the id of the task you want to update");
-//        Integer id = Integer.parseInt(SCANNER.nextLine());
-//        Optional<Anime> animeOptional = AnimeRepository.findById(id);
-//        if (animeOptional.isEmpty()){
-//            System.out.println("Anime not found");
-//            return;
-//        }
-//        Anime animeFromDb = animeOptional.get();
-//        System.out.println("Anime found " + animeFromDb);
-//        System.out.println("Type the new name or empty to keep the same");
-//        String name = SCANNER.nextLine();
-//        name = name.isEmpty() ? animeFromDb.getName() : name;
-//
-//        System.out.println("Type the new number of episodes or empty to keep the same");
-//        int episodes = Integer.parseInt(SCANNER.nextLine());
-//
-//        Anime animeToUpdate = Anime.builder()
-//                .id(animeFromDb.getId())
-//                .name(name)
-//                .episodes(episodes)
-//                .producer(animeFromDb.getProducer())
-//                .build();
-//
-//        AnimeRepository.update(animeToUpdate);
-//    }
+    public static void update() {
+        List<Task> tasks = TaskRepository.findAll();
+        for (Task task : tasks){
+            System.out.println(task);
+        }
+        System.out.println("Type the id of the task you want to update");
+        Integer id = Integer.parseInt(SCANNER.nextLine());
+        Optional<Task> taskOptional = TaskRepository.findById(id);
+        if (taskOptional.isEmpty()){
+            System.out.println("Task not found");
+            return;
+        }
+        Task taskFromDb = taskOptional.get();
+        System.out.println("Task found " + taskFromDb);
+        System.out.println("Type the new name or empty to keep the same");
+        String name = SCANNER.nextLine();
+        name = name.isEmpty() ? taskFromDb.getName() : name;
+
+        System.out.println("Type the new description or empty to keep the same");
+        String description = SCANNER.nextLine();
+        description = description.isEmpty() ? taskFromDb.getDescription() : description;
+
+        System.out.println("Mark the task as:");
+        System.out.println("1. Done");
+        System.out.println("2. To do");
+        System.out.println("3. In progress");
+
+        int op = Integer.parseInt(SCANNER.nextLine());
+        String status = switch (op) {
+            case 1 -> "DONE";
+            case 3 -> "IN PROGRESS";
+            default -> "TO DO";
+        };
+
+        Task taskToUpdate = Task.builder()
+                .id(taskFromDb.getId())
+                .name(name)
+                .description(description)
+                .status(status)
+                .createdAt(taskFromDb.getCreatedAt())
+                .updatedAt(LocalDateTime.now())
+                .build();
+
+        TaskRepository.update(taskToUpdate);
+    }
 }

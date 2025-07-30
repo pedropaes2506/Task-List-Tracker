@@ -93,24 +93,24 @@ public class TaskRepository {
         return ps;
     }
 
-//    public static void update(Task task) {
-//        log.info("Updating '{}'", task.getName());
-//        try (Connection conn = ConnectionFactory.getConnection();
-//             PreparedStatement ps = createPreparedStatementUpdate(conn, task)) {
-//            ps.execute();
-//        } catch (SQLException e) {
-//            log.error("Error while trying to update task '{}'", task.getName());
-//        }
-//    }
-//
-//    private static PreparedStatement createPreparedStatementUpdate(Connection conn, Task task) throws SQLException {
-//        String sql = "UPDATE `task_list_tracker_db`.`tasks_tb` SET `name` = ?, 'description' = ?, 'status' = ?, 'createdAt' = ?, 'updatedAt' = ? WHERE (`id` = ?);";
-//        PreparedStatement ps = conn.prepareStatement(sql);
-//        ps.setString(1, task.getName());
-//        ps.setString(2, task.getDescription());
-//        ps.setString(3, task.getStatus());
-//        ps.setTimestamp(4, Timestamp.valueOf(task.getUpdatedAt()));
-//        ps.setInt(5, task.getId());
-//        return ps;
-//    }
+    public static void update(Task task) {
+        log.info("Updating '{}'", task.getName());
+        try (Connection conn = ConnectionFactory.getConnection();
+             PreparedStatement ps = createPreparedStatementUpdate(conn, task)) {
+            ps.execute();
+        } catch (SQLException e) {
+            log.error("Error while trying to update task '{}'", task.getName(), e);
+        }
+    }
+
+    private static PreparedStatement createPreparedStatementUpdate(Connection conn, Task task) throws SQLException {
+        String sql = "UPDATE `task_list_tracker_db`.`tasks_tb` SET `name` = ?, `description` = ?, `status` = ?, `updatedAt` = ? WHERE (`id` = ?);";
+        PreparedStatement ps = conn.prepareStatement(sql);
+        ps.setString(1, task.getName());
+        ps.setString(2, task.getDescription());
+        ps.setString(3, task.getStatus());
+        ps.setTimestamp(4, Timestamp.valueOf(task.getUpdatedAt()));
+        ps.setInt(5, task.getId());
+        return ps;
+    }
 }

@@ -11,21 +11,22 @@ public class TrackerTest {
     private static final Scanner SCANNER = new Scanner(System.in);
 
     public static void main(String[] args) {
-//        int op;
-//        while(true) {
-//            menu();
-//            op = Integer.parseInt(SCANNER.nextLine());
-//            if (op == 0) break;
-//            switch (op) {
-//                case 1: TaskService.save();
-//            }
-//        }
-        System.out.println(TaskRepository.findAll());
+        int op;
+        while(true) {
+            menu();
+            op = Integer.parseInt(SCANNER.nextLine());
+            if (op == 0) break;
+            switch (op) {
+                case 1 -> TaskService.save();
+                case 2 -> TaskService.update();
+            }
+        }
     }
 
     private static void menu() {
         System.out.println("Type the number of your operation");
         System.out.println("1. Add task");
+        System.out.println("2. Update task");
         System.out.println("0. Exit");
     }
 }
