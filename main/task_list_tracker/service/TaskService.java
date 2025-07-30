@@ -4,6 +4,7 @@ import main.task_list_tracker.domain.Task;
 import main.task_list_tracker.repository.TaskRepository;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 import java.util.Scanner;
 
 public class TaskService {
@@ -37,4 +38,31 @@ public class TaskService {
                 .build();
         TaskRepository.save(task);
     }
+
+//    public static void update() {
+//        System.out.println("Type the id of the task you want to update");
+//        Integer id = Integer.parseInt(SCANNER.nextLine());
+//        Optional<Anime> animeOptional = AnimeRepository.findById(id);
+//        if (animeOptional.isEmpty()){
+//            System.out.println("Anime not found");
+//            return;
+//        }
+//        Anime animeFromDb = animeOptional.get();
+//        System.out.println("Anime found " + animeFromDb);
+//        System.out.println("Type the new name or empty to keep the same");
+//        String name = SCANNER.nextLine();
+//        name = name.isEmpty() ? animeFromDb.getName() : name;
+//
+//        System.out.println("Type the new number of episodes or empty to keep the same");
+//        int episodes = Integer.parseInt(SCANNER.nextLine());
+//
+//        Anime animeToUpdate = Anime.builder()
+//                .id(animeFromDb.getId())
+//                .name(name)
+//                .episodes(episodes)
+//                .producer(animeFromDb.getProducer())
+//                .build();
+//
+//        AnimeRepository.update(animeToUpdate);
+//    }
 }
