@@ -11,6 +11,28 @@ import java.util.Scanner;
 public class TaskService {
     private static final Scanner SCANNER = new Scanner(System.in);
 
+    public static void findAll() {
+        TaskRepository.findAll()
+                .forEach(System.out::println);
+    }
+
+    public static void findByStatus() {
+        System.out.println("Find all tasks where status is:");
+        System.out.println("1. Done");
+        System.out.println("2. To do");
+        System.out.println("3. In progress");
+
+        int op = Integer.parseInt(SCANNER.nextLine());
+        String status = switch (op) {
+            case 1 -> "DONE";
+            case 3 -> "IN PROGRESS";
+            default -> "TO DO";
+        };
+
+        TaskRepository.findByStatus(status)
+                .forEach(System.out::println);
+    }
+
     public static void save(){
         System.out.println("Type the name of the task you want to add");
         String name = SCANNER.nextLine();
@@ -95,10 +117,5 @@ public class TaskService {
         else {
             System.out.println("Delete process canceled");
         }
-    }
-
-    public static void findAll() {
-        TaskRepository.findAll()
-                .forEach(System.out::println);
     }
 }

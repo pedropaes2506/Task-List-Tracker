@@ -72,6 +72,38 @@ public class TaskRepository {
         return ps;
     }
 
+    public static List<Task> findByStatus(String status) {
+        log.info("Finding all tasks where status is '{}'", status);
+        List<Task> tasks = new ArrayList<>();
+        try (Connection conn = ConnectionFactory.getConnection();
+             PreparedStatement ps = createPreparedStatementFindByStatus(conn, status);
+             ResultSet rs = ps.executeQuery()) {
+
+            while (rs.next()) {
+                Task task = Task
+                        .builder()
+                        .id(rs.getInt("id"))
+                        .name(rs.getString("name"))
+                        .description(rs.getString("description"))
+                        .status(rs.getString("status"))
+                        .createdAt(rs.getTimestamp("createdAt").toLocalDateTime())
+                        .updatedAt(rs.getTimestamp("updatedAt").toLocalDateTime())
+                        .build();
+                tasks.add(task);
+            }
+        } catch (SQLException e) {
+            log.error("Error while trying to find all tasks where status is '{}'", status, e);
+        }
+        return tasks;
+    }
+
+    private static PreparedStatement createPreparedStatementFindByStatus(Connection conn, String status) throws SQLException {
+        String sql = "SELECT * FROM task_list_tracker_db.tasks_tb WHERE status = ?;";
+        PreparedStatement ps = conn.prepareStatement(sql);
+        ps.setString(1, status);
+        return ps;
+    }
+
     public static void save(Task task) {
         log.info("Saving task '{}'", task);
         try (Connection conn = ConnectionFactory.getConnection();

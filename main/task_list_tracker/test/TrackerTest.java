@@ -21,6 +21,7 @@ public class TrackerTest {
                 case 2 -> TaskService.update();
                 case 3 -> TaskService.delete();
                 case 4 -> TaskService.findAll();
+                case 5 -> TaskService.findByStatus();
             }
         }
     }
@@ -31,6 +32,7 @@ public class TrackerTest {
         System.out.println("2. Update task");
         System.out.println("3. Delete task");
         System.out.println("4. List all tasks");
+        System.out.println("5. List all tasks by status");
         System.out.println("0. Exit");
     }
 }
