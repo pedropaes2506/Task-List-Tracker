@@ -19,6 +19,7 @@ public class TrackerTest {
             switch (op) {
                 case 1 -> TaskService.save();
                 case 2 -> TaskService.update();
+                case 3 -> TaskService.delete();
             }
         }
     }
@@ -27,6 +28,7 @@ public class TrackerTest {
         System.out.println("Type the number of your operation");
         System.out.println("1. Add task");
         System.out.println("2. Update task");
+        System.out.println("3. Delete task");
         System.out.println("0. Exit");
     }
 }

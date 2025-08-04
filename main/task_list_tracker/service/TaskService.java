@@ -83,4 +83,21 @@ public class TaskService {
 
         TaskRepository.update(taskToUpdate);
     }
+
+    public static void delete() {
+        List<Task> tasks = TaskRepository.findAll();
+        for (Task task : tasks){
+            System.out.println(task);
+        }
+        System.out.println("Type the ID of the task you want to delete");
+        int id = Integer.parseInt(SCANNER.nextLine());
+        System.out.println("Are you sure? Y/N");
+        String choice = SCANNER.nextLine();
+        if ("y".equalsIgnoreCase(choice)) {
+            TaskRepository.delete(id);
+        }
+        else {
+            System.out.println("Delete process canceled");
+        }
+    }
 }

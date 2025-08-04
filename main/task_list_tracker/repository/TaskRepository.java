@@ -113,4 +113,22 @@ public class TaskRepository {
         ps.setInt(5, task.getId());
         return ps;
     }
+
+    public static void delete(int id) {
+        log.info("Deleting task");
+        try (Connection conn = ConnectionFactory.getConnection();
+             PreparedStatement ps = createPreparedStatementDelete(conn, id)) {
+            ps.execute();
+            log.info("Deleted task '{}' in the database", id);
+        } catch (SQLException e) {
+            log.error("Error while trying to delete task '{}'", id, e);
+        }
+    }
+
+    private static PreparedStatement createPreparedStatementDelete(Connection conn, Integer id) throws SQLException {
+        String sql = "DELETE FROM `task_list_tracker_db`.`tasks_tb` WHERE (`id` = ?);";
+        PreparedStatement ps = conn.prepareStatement(sql);
+        ps.setInt(1, id);
+        return ps;
+    }
 }
