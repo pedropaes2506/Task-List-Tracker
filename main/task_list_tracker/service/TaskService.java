@@ -39,10 +39,8 @@ public class TaskService {
     }
 
     public static void update() {
-        List<Task> tasks = TaskRepository.findAll();
-        for (Task task : tasks){
-            System.out.println(task);
-        }
+        TaskRepository.findAll()
+                .forEach(System.out::println);
         System.out.println("Type the id of the task you want to update");
         Integer id = Integer.parseInt(SCANNER.nextLine());
         Optional<Task> taskOptional = TaskRepository.findById(id);
@@ -85,10 +83,8 @@ public class TaskService {
     }
 
     public static void delete() {
-        List<Task> tasks = TaskRepository.findAll();
-        for (Task task : tasks){
-            System.out.println(task);
-        }
+        TaskRepository.findAll()
+                .forEach(System.out::println);
         System.out.println("Type the ID of the task you want to delete");
         int id = Integer.parseInt(SCANNER.nextLine());
         System.out.println("Are you sure? Y/N");
@@ -99,5 +95,10 @@ public class TaskService {
         else {
             System.out.println("Delete process canceled");
         }
+    }
+
+    public static void findAll() {
+        TaskRepository.findAll()
+                .forEach(System.out::println);
     }
 }
