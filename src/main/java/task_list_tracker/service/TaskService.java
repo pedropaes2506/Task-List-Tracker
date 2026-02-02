@@ -1,7 +1,7 @@
-package main.task_list_tracker.service;
+package task_list_tracker.service;
 
-import main.task_list_tracker.domain.Task;
-import main.task_list_tracker.repository.TaskRepository;
+import task_list_tracker.domain.Task;
+import task_list_tracker.repository.TaskRepository;
 
 import java.time.LocalDateTime;
 import java.util.List;

@@ -1,4 +1,4 @@
-package main.task_list_tracker.domain;
+package task_list_tracker.domain;
 
 import lombok.Builder;
 import lombok.Value;

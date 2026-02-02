@@ -1,4 +1,4 @@
-package main.task_list_tracker.conn;
+package task_list_tracker.conn;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

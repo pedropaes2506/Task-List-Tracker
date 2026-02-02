@@ -5,6 +5,7 @@ services:
     container_name: mysql-task-tracker
     environment:
       MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: task_list_tracker_db
     ports:
       - "3306:3306"
     volumes:

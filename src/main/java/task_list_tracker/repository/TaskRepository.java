@@ -1,8 +1,8 @@
-package main.task_list_tracker.repository;
+package task_list_tracker.repository;
 
 import lombok.extern.log4j.Log4j2;
-import main.task_list_tracker.conn.ConnectionFactory;
-import main.task_list_tracker.domain.Task;
+import task_list_tracker.conn.ConnectionFactory;
+import task_list_tracker.domain.Task;
 
 import java.sql.*;
 import java.util.ArrayList;

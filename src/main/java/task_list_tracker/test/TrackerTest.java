@@ -1,8 +1,8 @@
-package main.task_list_tracker.test;
+package task_list_tracker.test;
 
 import lombok.extern.log4j.Log4j2;
-import main.task_list_tracker.repository.TaskRepository;
-import main.task_list_tracker.service.TaskService;
+import org.flywaydb.core.Flyway;
+import task_list_tracker.service.TaskService;
 
 import java.util.Scanner;
 
@@ -11,6 +11,12 @@ public class TrackerTest {
     private static final Scanner SCANNER = new Scanner(System.in);
 
     public static void main(String[] args) {
+        Flyway flyway = Flyway.configure()
+                .dataSource("jdbc:mysql://localhost:3306/task_list_tracker_db", "root", "root")
+                .load();
+
+        flyway.migrate();
+
         int op;
         while(true) {
             menu();
